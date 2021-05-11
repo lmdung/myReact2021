@@ -55,13 +55,22 @@ const AvailableMeals = () => {
       setMeals(loadMeals);
       setIsLoading(false);
     }
-    
-    fetchMeals();
+    // not use: try {fetchMeals ()} catch () because fetchMeal is async fn > return a promise, catch error in promise will reject promise
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHTTPError(error.message)
+    });
    }, []);
 
   if (isLoading) {
     return <section className={classes.isLoading}>
       <p>Loading...</p>
+    </section>
+  }
+
+  if (httpError) {
+    return <section className={classes.error}>
+      <p>{httpError}</p>
     </section>
   }
   const mealsList = meals.map(meal => (
