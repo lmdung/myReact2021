@@ -10,7 +10,7 @@ import CommentsList from './CommentsList';
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
   const params = useParams();
-  const { sendRequest, status, error, data: listComments } = useHttp(getAllComments, true);
+  const { sendRequest, status, data: listComments } = useHttp(getAllComments, true);
 
   const { quoteId } = params;
   const startAddCommentHandler = () => {
